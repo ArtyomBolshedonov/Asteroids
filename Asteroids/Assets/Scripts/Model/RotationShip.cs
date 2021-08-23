@@ -6,8 +6,9 @@ namespace Asteroids
     internal sealed class RotationShip : IRotation
     {
         private readonly Transform _transform;
+        private readonly float _localRotation = 90.0f;
 
-        internal RotationShip(Transform transform)
+        public RotationShip(Transform transform)
         {
             _transform = transform;
         }
@@ -15,7 +16,7 @@ namespace Asteroids
         public void Rotation(Vector3 direction)
         {
             var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            _transform.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            _transform.transform.rotation = Quaternion.AngleAxis(angle - _localRotation, Vector3.forward);
         }
     }
 }

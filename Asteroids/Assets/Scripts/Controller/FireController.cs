@@ -5,21 +5,16 @@ namespace Asteroids
 {
     internal sealed class FireController : IExecute
     {
-        private Ship _ship;
+        private readonly Ship _ship;
 
-        internal FireController(Player player)
+        public FireController(Player player)
         {
             _ship = player.Ship;
         }
 
-        public void Execute()
+        public void Execute(float deltaTime)
         {
-            Shooting();
-        }
-
-        private void Shooting()
-        {
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown(InputManager.FIRE1))
             {
                 _ship.Shoot();
             }

@@ -2,6 +2,6 @@
 {
     public interface IExecute
     {
-        void Execute();
+        void Execute(float deltaTime);
     }
 }

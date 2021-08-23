@@ -1,26 +1,27 @@
 ﻿using UnityEngine;
+using Asteroids.ObjectPool;
 
 
 namespace Asteroids
 {
-    internal class ShootingShip : IShoot
+    internal sealed class ShootingShip : IShoot
     {
-        private BulletReference _bulletReference;
-        private Bullet _bullet;
         private readonly Transform _barrel;
+        private readonly BulletPool _bulletPool;
 
-        internal ShootingShip(Transform barrel)
+        public ShootingShip(Transform barrel)
         {
-            _bulletReference = new BulletReference();
-            _bullet = _bulletReference.Bullet;
+            _bulletPool = new BulletPool(5);
             _barrel = barrel;
         }
 
         public void Shoot()
         {
-            var temAmmunition = Object.Instantiate(_bullet.GetComponent<Rigidbody2D>(),
-                _barrel.position, _barrel.rotation);
-            temAmmunition.AddForce(_barrel.up * _bullet.Force);
+            var bullet = _bulletPool.GetBullet("Bullet");
+            bullet.transform.position = _barrel.position;
+            bullet.transform.rotation = _barrel.rotation;
+            bullet.gameObject.SetActive(true);
+            bullet.BulletFly(_barrel.up);
         }
     }
 }

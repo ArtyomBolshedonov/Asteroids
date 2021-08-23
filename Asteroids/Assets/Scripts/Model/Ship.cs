@@ -11,7 +11,7 @@ namespace Asteroids
 
         public float Speed => _moveImplementation.Speed;
 
-        internal Ship(IMove moveImplementation, IRotation rotationImplementation, IShoot shootImplementation)
+        public Ship(IMove moveImplementation, IRotation rotationImplementation, IShoot shootImplementation)
         {
             _moveImplementation = moveImplementation;
             _rotationImplementation = rotationImplementation;
@@ -28,7 +28,7 @@ namespace Asteroids
             _rotationImplementation.Rotation(direction);
         }
 
-        internal void AddAcceleration()
+        public void AddAcceleration()
         {
             if (_moveImplementation is AccelerationMove accelerationMove)
             {
@@ -36,7 +36,7 @@ namespace Asteroids
             }
         }
 
-        internal void RemoveAcceleration()
+        public void RemoveAcceleration()
         {
             if (_moveImplementation is AccelerationMove accelerationMove)
             {

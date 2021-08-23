@@ -6,27 +6,29 @@ namespace Asteroids
     internal class MovementController : IExecute
     {
         private readonly Ship _ship;
-        private Transform _transform;
-        private Camera _camera;
+        private readonly Camera _camera;
+        private readonly Transform _transform;
+        private readonly KeyCode _accelerate;
 
-        internal MovementController(Player player, Camera camera)
+        public MovementController(Player player, Camera camera)
         {
             _ship = player.Ship;
-            _transform = player.gameObject.transform;
             _camera = camera;
+            _transform = player.transform;
+            _accelerate = KeyCode.LeftShift;
         }
 
-        public void Execute()
+        public void Execute(float deltaTime)
         {
-            Move();
+            Move(deltaTime);
             Rotation();
             Acceleration();
             Deceleration();
         }
 
-        private void Move()
+        private void Move(float deltaTime)
         {
-            _ship.Move(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), Time.deltaTime);
+            _ship.Move(Input.GetAxis(InputManager.HORIZONTAL), Input.GetAxis(InputManager.VERTICAL), deltaTime);
         }
 
         private void Rotation()
@@ -37,7 +39,7 @@ namespace Asteroids
 
         private void Acceleration()
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKeyDown(_accelerate))
             {
                 _ship.AddAcceleration();
             }
@@ -45,7 +47,7 @@ namespace Asteroids
 
         private void Deceleration()
         {
-            if (Input.GetKeyUp(KeyCode.LeftShift))
+            if (Input.GetKeyUp(_accelerate))
             {
                 _ship.RemoveAcceleration();
             }

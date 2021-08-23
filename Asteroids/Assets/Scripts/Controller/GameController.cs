@@ -1,40 +1,35 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 
 namespace Asteroids
 {
     internal sealed class GameController : MonoBehaviour
     {
-        private PlayerCameraReference _playerCameraReference;
-        private Player _player;
-        private Camera _camera;
-        private ListExecuteObject _listExecuteObject;
-        private MovementController _inputController;
+        private GameStarter _gameStarter;
+        private List<IExecute> _listExecuteObject;
+        private MovementController _movementController;
         private FireController _fireController;
+        private GameLogicController _gameLogicController;
 
         private void Start()
         {
-            _playerCameraReference = new PlayerCameraReference();
-            _player = _playerCameraReference.Player;
-            _camera = _playerCameraReference.MainCamera;
-            _listExecuteObject = new ListExecuteObject();
-            _inputController = new MovementController(_player, _camera);
-            _listExecuteObject.AddExecuteObject(_inputController);
-            _fireController = new FireController(_player);
-            _listExecuteObject.AddExecuteObject(_fireController);
+            _gameStarter = FindObjectOfType<GameStarter>();
+            _listExecuteObject = new List<IExecute>();
+            _movementController = new MovementController(_gameStarter.Player, _gameStarter.Camera);
+            _listExecuteObject.Add(_movementController);
+            _fireController = new FireController(_gameStarter.Player);
+            _listExecuteObject.Add(_fireController);
+            _gameLogicController = new GameLogicController(_gameStarter.GetEnemies(), _gameStarter.Player);
+            _listExecuteObject.Add(_gameLogicController);
         }
 
         private void Update()
         {
-            for (var i = 0; i < _listExecuteObject.Length; i++)
+            var deltaTime = Time.deltaTime;
+            foreach (var item in _listExecuteObject)
             {
-                var listExecuteObject = _listExecuteObject[i];
-
-                if (listExecuteObject == null)
-                {
-                    continue;
-                }
-                listExecuteObject.Execute();
+                item.Execute(deltaTime);
             }
         }
     }

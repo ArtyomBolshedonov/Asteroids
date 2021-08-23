@@ -3,20 +3,19 @@
 
 namespace Asteroids
 {
-    internal sealed class Bullet : MonoBehaviour
+    internal sealed class Bullet : InteractiveObject
     {
         [SerializeField] private float _force;
+        [SerializeField] private float _damage;
 
-        internal float Force
+        public void BulletFly(Vector3 direction)
         {
-            get
-            {
-                return _force;
-            }
-            private set
-            {
-                _force = value;
-            }
+            gameObject.GetComponent<Rigidbody2D>().AddForce(direction * _force);
+        }
+
+        protected override void Interaction()
+        {
+            Player.Health -= _damage;
         }
     }
 }

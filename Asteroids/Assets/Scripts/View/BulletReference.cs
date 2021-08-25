@@ -6,7 +6,7 @@ namespace Asteroids
     internal sealed class BulletReference
     {
         private Bullet _bullet;
-
+        
         internal Bullet Bullet
         {
             get

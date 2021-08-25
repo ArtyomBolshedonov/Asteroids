@@ -39,7 +39,7 @@ namespace Asteroids
 
         public static Enemy CreateEnemy(Enemy enemy, Health hp, Vector3 Borders)
         {
-            var rand = Random.Range(-Borders.x, Borders.x);
+            var rand = UnityEngine.Random.Range(-Borders.x, Borders.x);
             var startPosition = new Vector3(-Borders.x, rand);
             var _enemy = Instantiate(enemy, startPosition, Quaternion.identity);
             _enemy.Health = hp;

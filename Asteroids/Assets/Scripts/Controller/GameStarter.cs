@@ -25,6 +25,7 @@ namespace Asteroids
             var gameBorders = new Vector3(_screenBorderX, _screenBorderY);
 
             _enemyReference = new EnemyReference();
+
             _enemies = new List<Enemy>();
 
             _enemies.Add(Enemy.CreateEnemy(_enemyReference.Asteroid,

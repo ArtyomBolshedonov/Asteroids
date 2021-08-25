@@ -10,7 +10,7 @@ namespace Asteroids
         private List<IExecute> _listExecuteObject;
         private MovementController _movementController;
         private FireController _fireController;
-        private GameLogicController _gameLogicController;
+        private GameMechanicTester _gameLogicController;
 
         private void Start()
         {
@@ -20,7 +20,7 @@ namespace Asteroids
             _listExecuteObject.Add(_movementController);
             _fireController = new FireController(_gameStarter.Player);
             _listExecuteObject.Add(_fireController);
-            _gameLogicController = new GameLogicController(_gameStarter.GetEnemies(), _gameStarter.Player);
+            _gameLogicController = new GameMechanicTester(_gameStarter.GetEnemies(), _gameStarter.Player);
             _listExecuteObject.Add(_gameLogicController);
         }
 

@@ -11,10 +11,12 @@ namespace Asteroids.ObjectPool
     {
         private readonly Dictionary<string, HashSet<Enemy>> _enemyPool;
         private readonly Transform _rootPool;
+        private readonly EnemyReference _enemyReference;
         private readonly int _capacityPool;
 
         public EnemyPool(int capacityPool)
         {
+            _enemyReference = new EnemyReference();
             _enemyPool = new Dictionary<string, HashSet<Enemy>>();
             _capacityPool = capacityPool;
             if (!_rootPool)
@@ -48,7 +50,7 @@ namespace Asteroids.ObjectPool
             var enemy = enemies.FirstOrDefault(a => !a.gameObject.activeSelf);
             if (enemy == null)
             {
-                var asteroid = Resources.Load<Asteroid>("Asteroid");
+                var asteroid = _enemyReference.Asteroid;
                 for (var i = 0; i < _capacityPool; i++)
                 {
                     var instantiate = Object.Instantiate(asteroid);

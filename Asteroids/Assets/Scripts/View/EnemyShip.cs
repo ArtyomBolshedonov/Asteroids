@@ -3,11 +3,11 @@
 
 namespace Asteroids
 {
-    internal sealed class EnemyShip : Enemy , IRotation, IShoot
+    internal sealed class EnemyShip : Enemy, IRotation, IShoot
     {
         [SerializeField] private float _speed;
-        [SerializeField] private Transform _barrel;
         [SerializeField] private float _damage;
+        [SerializeField] private Transform _barrel;
         private Ship _ship;
 
         private void Awake()

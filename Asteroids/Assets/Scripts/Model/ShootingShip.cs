@@ -4,23 +4,24 @@ using Asteroids.ObjectPool;
 
 namespace Asteroids
 {
-    internal sealed class ShootingShip : IShoot
+    internal class ShootingShip : IShoot
     {
-        private readonly Transform _barrel;
-        private readonly BulletPool _bulletPool;
+        protected Transform _barrel;
+        private BulletPool _bulletPool;
 
         public ShootingShip(Transform barrel)
         {
-            _bulletPool = new BulletPool(5);
             _barrel = barrel;
         }
 
-        public void Shoot()
+        public virtual void Shoot()
         {
+            if (_bulletPool == null)
+            {
+                _bulletPool = new BulletPool(5);
+            }
             var bullet = _bulletPool.GetBullet("Bullet");
-            bullet.transform.position = _barrel.position;
-            bullet.transform.rotation = _barrel.rotation;
-            bullet.gameObject.SetActive(true);
+            bullet.ActiveBullet(_barrel.position, _barrel.rotation);
             bullet.BulletFly(_barrel.up);
         }
     }

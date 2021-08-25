@@ -239,6 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
-  _barrel: {fileID: 4161088070251227069}
   _damage: 100
-  _gunReloadTime: 2
+  _barrel: {fileID: 4161088070251227069}
+  _laserSprite: {fileID: 21300000, guid: 6ed160a5201d4114389b94d918cd2ada, type: 3}
+  _laserMass: 0.0001

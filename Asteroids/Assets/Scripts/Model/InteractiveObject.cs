@@ -3,8 +3,9 @@
 
 namespace Asteroids
 {
-    internal abstract class InteractiveObject : MonoBehaviour, IInteractable
+    internal class InteractiveObject : MonoBehaviour, IInteractable
     {
+        [SerializeField] private float _damage;
         private bool _isInteractable;
         protected Player Player;
 
@@ -34,7 +35,9 @@ namespace Asteroids
             IsInteractable = false;
         }
 
-        protected abstract void Interaction();
-
+        protected virtual void Interaction()
+        {
+            Player.Health -= _damage;
+        }
     }
 }

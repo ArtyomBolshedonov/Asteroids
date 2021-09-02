@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2403651681015017684}
   - component: {fileID: 2403651681015017707}
-  - component: {fileID: 4940937341812355170}
   - component: {fileID: 9006123787623389836}
+  - component: {fileID: 6283318882763561672}
   - component: {fileID: 8986558913265587765}
   m_Layer: 0
   m_Name: Asteroid
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b66dcdc89480c6747b18da00a205b8b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -85,64 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &4940937341812355170
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2403651681015017706}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.35, y: 2.02}
-    newSize: {x: 2.35, y: 2.02}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.92499995, y: -0.44}
-      - {x: 0.97499996, y: -0.38}
-      - {x: 1.0849999, y: -0.22999999}
-      - {x: 1.105, y: -0.14999999}
-      - {x: 1.105, y: -0.03}
-      - {x: 1.095, y: 0.03}
-      - {x: 1.005, y: 0.32}
-      - {x: 0.865, y: 0.56}
-      - {x: 0.755, y: 0.71999997}
-      - {x: 0.66499996, y: 0.81}
-      - {x: 0.48499998, y: 0.9}
-      - {x: 0.33499998, y: 0.93}
-      - {x: 0.085, y: 0.93}
-      - {x: -0.035, y: 0.94}
-      - {x: -0.195, y: 0.94}
-      - {x: -0.305, y: 0.91999996}
-      - {x: -0.655, y: 0.76}
-      - {x: -0.805, y: 0.66999996}
-      - {x: -0.91499996, y: 0.56}
-      - {x: -0.965, y: 0.45999998}
-      - {x: -1.015, y: 0.34}
-      - {x: -1.035, y: 0.14999999}
-      - {x: -1.035, y: 0.049999997}
-      - {x: -1.005, y: -0.06}
-      - {x: -0.85499996, y: -0.37}
-      - {x: -0.79499996, y: -0.47}
-      - {x: -0.715, y: -0.57}
-      - {x: -0.355, y: -0.88}
-      - {x: -0.185, y: -0.96999997}
-      - {x: 0.155, y: -0.96999997}
-      - {x: 0.33499998, y: -0.89}
-      - {x: 0.585, y: -0.74}
-      - {x: 0.72499996, y: -0.64}
 --- !u!50 &9006123787623389836
 Rigidbody2D:
   serializedVersion: 4
@@ -164,6 +106,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!70 &6283318882763561672
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2403651681015017706}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.020863537, y: 0.0041731577}
+  m_Size: {x: 2.2749007, y: 1.9242368}
+  m_Direction: 1
 --- !u!114 &8986558913265587765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,5 +134,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c8ee70e0b419ac4a970fb2d193468e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 10
   _damage: 50
+  _speed: 10

@@ -6,7 +6,6 @@ namespace Asteroids
     internal sealed class EnemyShip : Enemy, IRotation, IShoot
     {
         [SerializeField] private float _speed;
-        [SerializeField] private float _damage;
         [SerializeField] private Transform _barrel;
         private Ship _ship;
 
@@ -39,10 +38,9 @@ namespace Asteroids
             _ship.Shoot();
         }
 
-        protected override void Interaction()
+        public void RocketAttack()
         {
-            Player.Health -= _damage;
-            Health.ChangeCurrentHealth(Health.Current - _damage);
+            _ship.RocketAttack(_barrel);
         }
     }
 }

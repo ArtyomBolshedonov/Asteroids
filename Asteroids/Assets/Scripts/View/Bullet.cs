@@ -6,10 +6,9 @@ namespace Asteroids
 {
     internal class Bullet : InteractiveObject
     {
-        [SerializeField] private float _damage = 10.0f;
         private Transform _rootPool;
 
-        public Transform RootPool
+        protected Transform RootPool
         {
             get
             {
@@ -34,11 +33,6 @@ namespace Asteroids
         public void BulletFly(Vector3 direction)
         {
             gameObject.GetComponent<Rigidbody2D>().AddForce(direction);
-        }
-
-        protected override void Interaction()
-        {
-            Player.Health -= _damage;
         }
 
         public void ReturnToPool()

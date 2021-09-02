@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Asteroids.ObjectPool;
+using Asteroids.Bridge;
 
 
 namespace Asteroids
@@ -9,6 +10,12 @@ namespace Asteroids
         public static IEnemyFactory Factory;
         private Transform _rootPool;
         private Health _health;
+        private IAnotherMove _anotherMove;
+
+        private void Awake()
+        {
+            _anotherMove = new AroundMove();
+        }
 
         public Health Health
         {
@@ -23,7 +30,7 @@ namespace Asteroids
             protected set => _health = value;
         }
 
-        public Transform RootPool
+        protected Transform RootPool
         {
             get
             {
@@ -39,7 +46,7 @@ namespace Asteroids
 
         public static Enemy CreateEnemy(Enemy enemy, Health hp, Vector3 Borders)
         {
-            var rand = UnityEngine.Random.Range(-Borders.x, Borders.x);
+            var rand = Random.Range(-Borders.x, Borders.x);
             var startPosition = new Vector3(-Borders.x, rand);
             var _enemy = Instantiate(enemy, startPosition, Quaternion.identity);
             _enemy.Health = hp;
@@ -54,7 +61,7 @@ namespace Asteroids
             transform.SetParent(null);
         }
 
-        protected void ReturnToPool()
+        public void ReturnToPool()
         {
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
@@ -66,10 +73,15 @@ namespace Asteroids
                 Destroy(gameObject);
             }
         }
-
+        
         public abstract void DependencyInjectHealth(Health hp);
 
         public float Speed { get; protected set; }
         public abstract void Move(float horizontal, float vertical, float deltaTime);
+
+        public void AroundMove()
+        {
+            _anotherMove.AnotherMove(transform);
+        }
     }
 }

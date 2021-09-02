@@ -7,6 +7,7 @@ namespace Asteroids
     {
         private Player _player;
         private Camera _mainCamera;
+        private Aim _aim;
 
         internal Player Player
         {
@@ -31,6 +32,19 @@ namespace Asteroids
                     _mainCamera = Camera.main;
                 }
                 return _mainCamera;
+            }
+        }
+
+        internal Aim Aim
+        {
+            get
+            {
+                if (_aim == null)
+                {
+                    _aim = Resources.Load<Aim>("Aim");
+                }
+
+                return _aim;
             }
         }
     }

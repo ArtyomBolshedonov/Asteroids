@@ -14,6 +14,9 @@ namespace Asteroids
 
         public Ship Ship { get; private set; }
 
+        public Transform Barrel => _barrel;
+        public bool UnlockShooting { get; set; } = true;
+
         public float Health
         {
             get
@@ -33,6 +36,11 @@ namespace Asteroids
             var rotation = new RotationShip(transform);
             var shooting = new LaserShootingShip(_barrel, _laserSprite, _laserMass);
             Ship = new Ship(moveRigidBody, rotation, shooting);
+        }
+
+        public void RocketAttack()
+        {
+            Ship.RocketAttack(_barrel);
         }
     }
 }

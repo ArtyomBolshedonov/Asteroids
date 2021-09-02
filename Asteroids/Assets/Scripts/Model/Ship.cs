@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Asteroids.Bridge;
 
 
 namespace Asteroids
@@ -8,6 +9,7 @@ namespace Asteroids
         private readonly IMove _moveImplementation;
         private readonly IRotation _rotationImplementation;
         private readonly IShoot _shootImplementation;
+        private readonly IAttack _rocketAttack;
 
         public float Speed => _moveImplementation.Speed;
 
@@ -16,6 +18,7 @@ namespace Asteroids
             _moveImplementation = moveImplementation;
             _rotationImplementation = rotationImplementation;
             _shootImplementation = shootImplementation;
+            _rocketAttack = new RocketAttack();
         }
 
         public void Move(float horizontal, float vertical, float deltaTime)
@@ -47,6 +50,11 @@ namespace Asteroids
         public void Shoot()
         {
             _shootImplementation.Shoot();
+        }
+
+        public void RocketAttack(Transform barrel)
+        {
+            _rocketAttack.Attack(barrel);
         }
     }
 }

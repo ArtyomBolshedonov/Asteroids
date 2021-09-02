@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using Asteroids.Decorator;
 
 
 namespace Asteroids
@@ -18,7 +19,8 @@ namespace Asteroids
             _listExecuteObject = new List<IExecute>();
             _movementController = new MovementController(_gameStarter.Player, _gameStarter.Camera);
             _listExecuteObject.Add(_movementController);
-            _fireController = new FireController(_gameStarter.Player);
+            ModificationAim modificationPlayer = new ModificationAim(_gameStarter.Aim);
+            _fireController = new FireController(_gameStarter.Player, modificationPlayer);
             _listExecuteObject.Add(_fireController);
             _gameLogicController = new GameMechanicTester(_gameStarter.GetEnemies(), _gameStarter.Player);
             _listExecuteObject.Add(_gameLogicController);

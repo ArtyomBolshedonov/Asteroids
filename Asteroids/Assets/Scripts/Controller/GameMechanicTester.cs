@@ -27,12 +27,15 @@ namespace Asteroids
             _rocketTime -= deltaTime;
             foreach (var item in _enemies)
             {
-                _direction = _player.gameObject.transform.position - item.gameObject.transform.position;
-                item.Move(_direction.x, _direction.y, deltaTime);
-                RotateAround(item);
-                if (item is EnemyShip enemyShip)
+                if (item != null)
                 {
-                    EnemyAimShoot(enemyShip);
+                    _direction = _player.gameObject.transform.position - item.gameObject.transform.position;
+                    item.Move(_direction.x, _direction.y, deltaTime);
+                    RotateAround(item);
+                    if (item is EnemyShip enemyShip)
+                    {
+                        EnemyAimShoot(enemyShip);
+                    }
                 }
             }
         }

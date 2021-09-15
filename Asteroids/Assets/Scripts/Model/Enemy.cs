@@ -83,5 +83,17 @@ namespace Asteroids
         {
             _anotherMove.AnotherMove(transform);
         }
+
+        protected override void Interaction()
+        {
+            ReturnToPool();
+            base.Interaction();
+        }
+
+        protected override void SelfInteraction()
+        {
+            Player.Scores += _scores;
+            ReturnToPool();
+        }
     }
 }

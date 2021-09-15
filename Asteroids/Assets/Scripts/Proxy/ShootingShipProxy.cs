@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
+using Asteroids.ChainOfResponsibility;
 
 
 namespace Asteroids.Proxy
 {
     internal sealed class ShootingShipProxy : IShoot
     {
-        private readonly IShoot _shoot;
+        private readonly ShipChainOfResponsibility _ship;
         private readonly UnlockShooting _unlockShooting;
 
-        public ShootingShipProxy(IShoot shoot, UnlockShooting unlockShooting)
+        public ShootingShipProxy(ShipChainOfResponsibility ship, UnlockShooting unlockShooting)
         {
-            _shoot = shoot;
+            _ship = ship;
             _unlockShooting = unlockShooting;
         }
 
@@ -18,7 +19,7 @@ namespace Asteroids.Proxy
         {
             if (_unlockShooting.IsUnlock)
             {
-                _shoot.Shoot();
+                _ship.ShootImplementation.Shoot();
             }
             else
             {

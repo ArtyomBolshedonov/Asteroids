@@ -19,7 +19,7 @@ namespace Asteroids
         public Camera Camera { get; private set; }
         public Aim Aim { get; private set; }
 
-        private void Start()
+        private void Awake()
         {
             _referenceCreator = new ReferenceCreator();
             Player = _referenceCreator.GetPlayerobjects().Player;
@@ -45,6 +45,11 @@ namespace Asteroids
         public List<Enemy> GetEnemies()
         {
             return _enemies;
+        }
+
+        public UIReference GetUI()
+        {
+            return _referenceCreator.GetUIObjects();
         }
     }
 }

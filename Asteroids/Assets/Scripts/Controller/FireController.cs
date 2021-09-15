@@ -37,7 +37,7 @@ namespace Asteroids
                 _modificationPlayer.ApplyModification(player);
                 if (Input.GetButtonDown(InputManager.FIRE1))
                 {
-                    player.RocketAttack();
+                    player.Ship.RocketAttackImplementation.Attack(player.Barrel);
                 }
             }
             _modificationPlayer.RemoveModification(Input.GetButton(InputManager.FIRE2));

@@ -47,5 +47,16 @@ namespace Asteroids
                 Destroy(gameObject);
             }
         }
+
+        protected override void Interaction()
+        {
+            ReturnToPool();
+            base.Interaction();
+        }
+
+        protected override void SelfInteraction()
+        {
+            ReturnToPool();
+        }
     }
 }

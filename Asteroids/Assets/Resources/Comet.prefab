@@ -185,4 +185,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 70
+  _scores: 5432.1
   _speed: 7

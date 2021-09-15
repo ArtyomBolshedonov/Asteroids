@@ -176,5 +176,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 100
+  _scores: 600000
   _speed: 10
   _barrel: {fileID: 4161088070251227069}

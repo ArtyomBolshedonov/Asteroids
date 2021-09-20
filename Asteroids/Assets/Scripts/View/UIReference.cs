@@ -10,6 +10,7 @@ namespace Asteroids
         private HealthPanel _healthPanel;
         private TimePanel _timePanel;
         private ScorePanel _scorePanel;
+        private HitPanel _hitPanel;
 
         internal Canvas Canvas
         {
@@ -62,6 +63,20 @@ namespace Asteroids
                 }
 
                 return _scorePanel;
+            }
+        }
+
+        internal HitPanel HitPanel
+        {
+            get
+            {
+                if (_hitPanel == null)
+                {
+                    var hitPanel = Resources.Load<HitPanel>("HitPanel");
+                    _hitPanel = Object.Instantiate(hitPanel, Canvas.transform);
+                }
+
+                return _hitPanel;
             }
         }
     }

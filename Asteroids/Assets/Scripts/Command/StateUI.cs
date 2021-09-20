@@ -6,5 +6,6 @@
         HealthPanel = 1,
         TimePanel = 2,
         ScorePanel = 3,
+        HitPanel = 4,
     }
 }

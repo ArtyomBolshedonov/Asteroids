@@ -13,6 +13,7 @@ namespace Asteroids
         private FireController _fireController;
         private GameMechanicTester _gameLogicController;
         private UIController _uIController;
+        private EventController _eventController;
 
         private void Start()
         {
@@ -27,6 +28,8 @@ namespace Asteroids
             _listExecuteObject.Add(_gameLogicController);
             _uIController = new UIController(_gameStarter.GetUI(), _gameStarter.Player);
             _listExecuteObject.Add(_uIController);
+            _eventController = new EventController(_gameStarter);
+            _listExecuteObject.Add(_eventController);
         }
 
         private void Update()

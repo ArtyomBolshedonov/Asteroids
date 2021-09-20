@@ -1,21 +1,18 @@
 ﻿using UnityEngine;
+using System;
 using Asteroids.ObjectPool;
 using Asteroids.Bridge;
+using Asteroids.Observer;
 
 
 namespace Asteroids
 {
-    internal abstract class Enemy : InteractiveObject, IMove
+    internal abstract class Enemy : InteractiveObject, IMove, IHit
     {
         public static IEnemyFactory Factory;
         private Transform _rootPool;
         private Health _health;
         private IAnotherMove _anotherMove;
-
-        private void Awake()
-        {
-            _anotherMove = new AroundMove();
-        }
 
         public Health Health
         {
@@ -44,9 +41,16 @@ namespace Asteroids
             }
         }
 
+        public event Action<Enemy> OnHitChange = delegate (Enemy e) { };
+
+        private void Awake()
+        {
+            _anotherMove = new AroundMove();
+        }
+
         public static Enemy CreateEnemy(Enemy enemy, Health hp, Vector3 Borders)
         {
-            var rand = Random.Range(-Borders.x, Borders.x);
+            var rand = UnityEngine.Random.Range(-Borders.x, Borders.x);
             var startPosition = new Vector3(-Borders.x, rand);
             var _enemy = Instantiate(enemy, startPosition, Quaternion.identity);
             _enemy.Health = hp;
@@ -86,14 +90,19 @@ namespace Asteroids
 
         protected override void Interaction()
         {
-            ReturnToPool();
+            IsInteractable = false;
             base.Interaction();
         }
 
         protected override void SelfInteraction()
         {
+            IsInteractable = false;
             Player.Scores += _scores;
-            ReturnToPool();
+        }
+
+        public void Hit(Enemy enemy)
+        {
+            OnHitChange.Invoke(enemy);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Asteroids.ChainOfResponsibility;
 using Asteroids.Bridge;
+using Asteroids.State;
 
 
 namespace Asteroids
@@ -17,6 +18,11 @@ namespace Asteroids
         public ShipChainOfResponsibility Ship { get; private set; }
 
         public Transform Barrel => _barrel;
+
+        public MovementState MovementState { get; set; }
+
+        public Speed Speed { get; private set; }
+
         public bool UnlockShooting { get; set; } = true;
 
         public float Health
@@ -33,16 +39,23 @@ namespace Asteroids
 
         public long Scores { get; set; }
 
+        public float Acceleration
+        {
+            get
+            {
+                return _acceleration;
+            }
+        }
+
         private void Awake()
         {
-            var shipRigidbody2D = gameObject.GetComponent<Rigidbody2D>();
-            var moveRigidBody = new AccelerationMove(shipRigidbody2D, _speed, _acceleration);
+            Speed = new Speed(_speed,_speed);
             var rotation = new RotationShip(transform);
             var shooting = new LaserShootingShip(_barrel, _laserSprite, _laserMass);
             var rocketAttack = new RocketAttack();
             Ship = new ShipChainOfResponsibility();
             var root = new ShipModifier(Ship);
-            root.Add(new AddMoveModifier(Ship, moveRigidBody));
+            root.Add(new AddMoveModifier(Ship, MovementState));
             root.Add(new AddRotationModifier(Ship, rotation));
             root.Add(new AddShootingModifier(Ship, shooting));
             root.Add(new AddRocketAttackModifier(Ship, rocketAttack));
